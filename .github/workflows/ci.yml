@@ -1,6 +1,6 @@
 name: Github Actions
 run-name: Running Github Actions Workflow
-on: pull_request
+on: [pull_request, workflow_dispatch]
 jobs:
   test-automation:
     runs-on: ubuntu-latest
