@@ -1,0 +1,15 @@
+name: Github Actions
+run-name: Running Github Actions Workflow
+on: pull_request
+jobs:
+  test-automation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install
+      - run: npm test
+
+  
