@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
-import { addComment } from '../redux/comment/action';
 
-function AddComment({ threadId, dispatch }) {
+function AddComment({ threadId, onAddComment }) {
   const formikComment = useFormik({
     initialValues: {
       content: '',
     },
     onSubmit: (values) => {
       const body = { threadId, content: values.content };
-      dispatch(addComment(body));
+      onAddComment(body);
     },
     enableReinitialize: true,
   });
@@ -31,7 +30,7 @@ function AddComment({ threadId, dispatch }) {
 
 AddComment.propTypes = {
   threadId: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  onAddComment: PropTypes.func.isRequired,
 };
 
 export default AddComment;

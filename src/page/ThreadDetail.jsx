@@ -5,6 +5,7 @@ import { upvoteThread, fetchThreadDetail } from '../redux/thread/action';
 import AddComment from '../component/AddComment';
 import ThreadItem from '../component/ThreadItem';
 import CommentList from '../component/CommentList';
+import { addComment, upvoteComment } from '../redux/comment/action';
 
 function ThreadDetail() {
   const { id } = useParams();
@@ -19,6 +20,16 @@ function ThreadDetail() {
     const isUpvoted = threadDetail.upVotesBy.find((it) => it === user?.id);
     dispatch(upvoteThread({
       threadId: id, userId: user?.id || null, unUpvote: isUpvoted !== undefined,
+    }));
+  };
+
+  const onAddComment = (body) => {
+    dispatch(addComment(body));
+  };
+
+  const onUpvoteComment = (commentId, isUpvoted) => {
+    dispatch(upvoteComment({
+      threadId: id, commentId, userId: user?.id, unUpvote: isUpvoted,
     }));
   };
 
@@ -46,7 +57,7 @@ function ThreadDetail() {
           <span className="badge badge-secondary">{threadDetail.category}</span>
         </p>
         {user != null ? (
-          <AddComment threadId={threadDetail.id} dispatch={dispatch} />
+          <AddComment threadId={threadDetail.id} onAddComment={onAddComment} />
         ) : (
           <div>
             <p>
@@ -63,7 +74,7 @@ function ThreadDetail() {
           {threadDetail.comments.length}
           )
         </p>
-        <CommentList comments={threadDetail.comments} threadId={id} userId={user?.id} />
+        <CommentList comments={threadDetail.comments} onUpvoteComment={onUpvoteComment} />
       </div>
     </div>
   );

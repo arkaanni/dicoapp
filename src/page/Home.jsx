@@ -5,7 +5,7 @@ import ThreadList from '../component/ThreadList';
 
 function Home() {
   const { user, tagList } = useSelector((state) => state);
-  const [, setSearchParam] = useSearchParams();
+  const [searchParam, setSearchParam] = useSearchParams();
 
   const onTagClick = (tag) => {
     setSearchParam({ tag });
@@ -14,7 +14,7 @@ function Home() {
   return (
     <div className="flex gap-6 w-full mx-auto">
       <div className="w-9/12 rounded-lg shadow">
-        <ThreadList />
+        <ThreadList tagParam={searchParam.get('tag')} />
       </div>
       <div className="w-3/12 flex flex-col gap-4">
         {user != null && (<Link to="/thread/new" className="btn btn-primary lowercase">buat thread</Link>)}

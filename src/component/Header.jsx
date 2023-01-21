@@ -1,12 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { logoutUser } from '../redux/user/action';
 
-function Header({ user }) {
-  const dispatch = useDispatch();
-
+function Header({ user, onLogout }) {
   return (
     <div className="flex justify-between bg-primary-content text-slate-100 p-4 lowercase shadow-md">
       <Link to="/">dicoding forum</Link>
@@ -15,7 +11,7 @@ function Header({ user }) {
         {user == null ? (
           <Link to="/login" className="link-primary">login</Link>
         ) : (
-          <button type="button" className="link-primary cursor-pointer" onClick={() => dispatch(logoutUser())}>logout</button>
+          <button type="button" className="link-primary cursor-pointer" onClick={onLogout}>logout</button>
         )}
       </div>
     </div>
@@ -23,11 +19,13 @@ function Header({ user }) {
 }
 
 Header.defaultProps = {
-  user: {},
+  user: null,
+  onLogout: null,
 };
 
 Header.propTypes = {
   user: PropTypes.objectOf(Object),
+  onLogout: PropTypes.func,
 };
 
 export default Header;
