@@ -46,7 +46,7 @@ function ThreadDetail() {
           <span className="badge badge-secondary">{threadDetail.category}</span>
         </p>
         {user != null ? (
-          <AddComment threadId={threadDetail.id} />
+          <AddComment threadId={threadDetail.id} dispatch={dispatch} />
         ) : (
           <div>
             <p>
