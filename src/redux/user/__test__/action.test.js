@@ -1,6 +1,6 @@
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { loginUser, setUser } from '../action';
 import { userApi } from '../../../api/dicodingforum';
-import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { displayMessage, MessageType } from '../../message/action';
 
 jest.mock('../../../api/dicodingforum');

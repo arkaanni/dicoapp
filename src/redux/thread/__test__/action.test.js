@@ -1,6 +1,8 @@
-import { Action, addThread, createThread, setTagList, upvoteThread } from '../action';
-import { displayMessage, MessageType } from '../../message/action';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import {
+  Action, addThread, createThread, setTagList, upvoteThread,
+} from '../action';
+import { displayMessage, MessageType } from '../../message/action';
 import { threadApi } from '../../../api/dicodingforum';
 
 jest.mock('../../message/action');
@@ -39,7 +41,7 @@ describe('upvoteThread thunk test', () => {
     expect(dispatch).toHaveBeenCalledWith({
       type: Action.ADD_UPVOTE,
       payload: {
-        userId: params.userId
+        userId: params.userId,
       },
     });
     expect(dispatch).toHaveBeenCalledWith(hideLoading());
@@ -64,7 +66,7 @@ describe('upvoteThread thunk test', () => {
     expect(dispatch).toHaveBeenCalledWith({
       type: Action.UNDO_UPVOTE,
       payload: {
-        userId: params.userId
+        userId: params.userId,
       },
     });
     expect(dispatch).toHaveBeenCalledWith(hideLoading());
@@ -108,7 +110,7 @@ describe('upvoteThread thunk test', () => {
     })(dispatch, getState);
     expect(dispatch).toHaveBeenCalledWith(showLoading());
     expect(dispatch).toHaveBeenCalledWith(addThread(mockThread));
-    expect(dispatch).toHaveBeenCalledWith(setTagList({'General': 1}));
+    expect(dispatch).toHaveBeenCalledWith(setTagList({ General: 1 }));
     expect(dispatch).toHaveBeenCalledWith(hideLoading());
     expect(dispatch).toHaveBeenCalledWith(displayMessage());
     expect(displayMessage).toHaveBeenCalledWith({

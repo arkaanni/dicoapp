@@ -5,18 +5,17 @@ import userEvent from '@testing-library/user-event';
 import Header from '../Header';
 
 describe('Header component test', () => {
-
   it('should show header with login link when user is null', () => {
     const { getByRole, queryByRole } = render(
       <BrowserRouter>
         <Header handleLogout={null} />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
     const loginLink = getByRole('link', { name: 'login' });
     expect(loginLink).toBeInTheDocument();
-    expect(queryByRole('link', { name: 'logout' })).not.toBeInTheDocument()
+    expect(queryByRole('link', { name: 'logout' })).not.toBeInTheDocument();
   });
-  
+
   it('should show header with logout button when user is not null', async () => {
     const onLogout = jest.fn();
     const mockUser = {
@@ -27,7 +26,7 @@ describe('Header component test', () => {
     const { getByRole, queryByRole } = render(
       <BrowserRouter>
         <Header user={mockUser} onLogout={onLogout} />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
     expect(queryByRole('link', { name: 'login' })).not.toBeInTheDocument();
     const logoutBtn = getByRole('button', { name: 'logout' });
