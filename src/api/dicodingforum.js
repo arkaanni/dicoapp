@@ -133,4 +133,5 @@ export {
   userApi,
   threadApi,
   leaderboardApi,
+  BASE_URL as baseUrl,
 };
