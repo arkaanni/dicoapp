@@ -1,9 +1,7 @@
+import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { addComment } from '../../redux/comment/action';
 import AddComment from '../AddComment';
-
-jest.mock('../../redux/comment/action');
 
 const mockThread = {
   id: 'thread-1',
@@ -36,33 +34,31 @@ const mockThread = {
 
 describe('AddComment component test', () => {
   it('should render component correctly', async () => {
-    const dispatch = jest.fn();
+    const onAddComment = jest.fn();
     const { getByPlaceholderText, getByRole } = render(
-      <AddComment dispatch={dispatch} threadId={mockThread.id} />
+      <AddComment onAddComment={onAddComment} threadId={mockThread.id} />,
     );
     const addCommentInput = getByPlaceholderText('tambah komentar');
     expect(addCommentInput).toBeInTheDocument();
     await userEvent.type(addCommentInput, 'test komentar');
     expect(addCommentInput).toHaveValue('test komentar');
-    expect(getByRole('button', {name: 'submit' })).toBeInTheDocument();
+    expect(getByRole('button', { name: 'submit' })).toBeInTheDocument();
   });
 
-  it('should dispatch addComment thunk function when submit button clicked', async () => {
-    const dispatch = jest.fn();
-    addComment.mockImplementation(() => {});
+  it('should call onAddComment function when submit button clicked', async () => {
+    const onAddComment = jest.fn();
     const { getByPlaceholderText, getByRole } = render(
-      <AddComment dispatch={dispatch} threadId={mockThread.id} />
+      <AddComment onAddComment={onAddComment} threadId={mockThread.id} />,
     );
     const addCommentInput = getByPlaceholderText('tambah komentar');
     await userEvent.type(addCommentInput, 'test komentar');
     expect(addCommentInput).toHaveValue('test komentar');
-    const submitBtn = getByRole('button', {name: 'submit' });
+    const submitBtn = getByRole('button', { name: 'submit' });
     await userEvent.click(submitBtn);
-    expect(dispatch).toHaveBeenCalledWith(addComment())
-    expect(addComment).toHaveBeenCalledWith({
+    expect(onAddComment).toHaveBeenCalledWith({
       threadId: mockThread.id,
       content: addCommentInput.value,
     });
-    expect(dispatch).toHaveBeenCalledTimes(1);
+    expect(onAddComment).toHaveBeenCalledTimes(1);
   });
 });
