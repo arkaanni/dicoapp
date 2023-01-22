@@ -41,4 +41,49 @@ describe('login spec', () => {
       expect(text.get(1)).to.have.text('password is a required field');
     });
   });
+
+  it('should display alert message when login is failed', () => {
+    cy.intercept({
+      method: 'POST',
+      url: `${baseUrl}/login`,
+    }, {
+      status: 'fail',
+      message: 'wrong username or password',
+      data: null,
+    }).as('login');
+    cy.get('input[name="email"]').type('test@test.com');
+    cy.get('input[name="password"]').type('passwordtest');
+    cy.get('input[value="login"]').click();
+    cy.wait('@login');
+    cy.get('.alert').should('have.text', 'wrong username or password');
+  });
+
+  it('should go to home when login is success', () => {
+    cy.intercept({
+      method: 'POST',
+      url: `${baseUrl}/login`,
+    }, {
+      status: 'success',
+      message: 'ok',
+      data: {
+        token: 'qwertyuiop',
+      },
+    }).as('login');
+    cy.intercept(`${baseUrl}/users/me`, {
+      status: 'success',
+      message: 'ok',
+      data: {
+        user: {
+          id: 'user-1',
+          name: 'user 1',
+        }
+      },
+    }).as('getProfile');
+    cy.get('input[name="email"]').type('test@test.com');
+    cy.get('input[name="password"]').type('passwordtest');
+    cy.get('input[value="login"]').click();
+    cy.url().should('eq', 'http://localhost:3000/')
+    cy.get('button').contains('logout').should('be.visible');
+    cy.get('a').contains('buat thread').should('be.visible');
+  });
 });
