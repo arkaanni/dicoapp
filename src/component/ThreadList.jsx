@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AiOutlineComment, AiOutlineClockCircle } from 'react-icons/ai';
+import PropTypes from 'prop-types';
 
-function ThreadList() {
+function ThreadList({ tagParam }) {
   const { threadList, userList } = useSelector((state) => state);
-  const [searchParam] = useSearchParams();
 
-  const tag = searchParam.get('tag');
-  const threads = tag === null ? threadList : threadList.filter((it) => it.category === tag);
+  const threads = tagParam === null ? threadList
+    : threadList.filter((it) => it.category === tagParam);
 
   return (
     <div className="container mx-auto text-xs">
@@ -61,5 +61,13 @@ function ThreadList() {
     </div>
   );
 }
+
+ThreadList.defaultProps = {
+  tagParam: null,
+};
+
+ThreadList.propTypes = {
+  tagParam: PropTypes.string,
+};
 
 export default ThreadList;

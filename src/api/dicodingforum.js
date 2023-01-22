@@ -62,7 +62,6 @@ const userApi = {
   getAll: async () => getJson(await getRequest({ endpoint: '/users' })),
   profile: async () => getJson(await getRequest({ endpoint: '/users/me' })),
   setAccessToken: (token) => localStorage.setItem('accessToken', token),
-  getAccessToken,
 };
 
 const threadApi = {
@@ -134,4 +133,5 @@ export {
   userApi,
   threadApi,
   leaderboardApi,
+  BASE_URL as baseUrl,
 };

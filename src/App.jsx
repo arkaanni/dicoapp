@@ -10,6 +10,7 @@ import Login from './page/Login';
 import Register from './page/Register';
 import ThreadDetail from './page/ThreadDetail';
 import { preloadState } from './redux/preload/action';
+import { logoutUser } from './redux/user/action';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,10 +24,14 @@ function App() {
     return null;
   }
 
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
+
   return (
     <div className="mx-auto h-screen w-full pb-10">
       <div className="sticky top-0 z-50">
-        <Header user={user} />
+        <Header user={user} onLogout={handleLogout} />
       </div>
       <div>
         <LoadingBar style={{ backgroundColor: 'green' }} showFastActions />

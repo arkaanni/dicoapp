@@ -17,9 +17,12 @@ const unsetMessage = () => ({
   type: Action.UNSET_MESSAGE,
 });
 
+let timeout;
+
 const displayMessage = ({ type, text }) => (dispatch) => {
   dispatch(setMessage({ type, text }));
-  setTimeout(() => {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
     dispatch(setMessage(null));
   }, 5000);
 };

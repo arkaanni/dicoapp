@@ -1,22 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { addComment } from '../redux/comment/action';
+import { useFormik } from 'formik';
 
-function AddComment({ threadId }) {
-  const dispatch = useDispatch();
-
-  const submitComment = (e) => {
-    e.preventDefault();
-    const body = { threadId, content: e.target[0].value };
-    dispatch(addComment(body));
-  };
+function AddComment({ threadId, onAddComment }) {
+  const formikComment = useFormik({
+    initialValues: {
+      content: '',
+    },
+    onSubmit: (values) => {
+      const body = { threadId, content: values.content };
+      onAddComment(body);
+    },
+    enableReinitialize: true,
+  });
 
   return (
-    <form onSubmit={submitComment}>
+    <form onSubmit={formikComment.handleSubmit}>
       <div className="flex flex-col gap-2">
         <div className="form-control">
-          <textarea className="textarea textarea-primary" name="body" id="comment-text" rows="3" placeholder="tambah komentar" />
+          <textarea onChange={formikComment.handleChange} className="textarea textarea-primary" name="content" id="comment-text" rows="3" placeholder="tambah komentar" />
         </div>
         <div className="form-control">
           <button type="submit" className="btn btn-primary lowercase btn-sm w-fit self-end">submit</button>
@@ -28,6 +30,7 @@ function AddComment({ threadId }) {
 
 AddComment.propTypes = {
   threadId: PropTypes.string.isRequired,
+  onAddComment: PropTypes.func.isRequired,
 };
 
 export default AddComment;

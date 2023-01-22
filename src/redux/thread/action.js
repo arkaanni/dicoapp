@@ -101,7 +101,7 @@ const upvoteThread = ({ threadId, userId, unUpvote }) => async (dispatch) => {
   if (userId === null) {
     dispatch(displayMessage({
       type: MessageType.ERROR,
-      text: 'login untuk memberikan vote',
+      text: 'login untuk memberikan upvote',
     }));
     return;
   }
@@ -109,7 +109,7 @@ const upvoteThread = ({ threadId, userId, unUpvote }) => async (dispatch) => {
   let voteFunc = threadApi.votes.upVote;
   const message = {
     type: MessageType.INFO,
-    text: 'berhasil memberikan vote',
+    text: 'berhasil memberikan upvote',
   };
   if (unUpvote) {
     voteFunc = threadApi.votes.neutralize;
@@ -122,7 +122,7 @@ const upvoteThread = ({ threadId, userId, unUpvote }) => async (dispatch) => {
   if (!success) {
     dispatch(undoThreadUpvote());
     message.type = MessageType.ERROR;
-    message.text = 'login untuk memberi vote';
+    message.text = 'login untuk memberikan upvote';
   }
   dispatch(hideLoading());
   dispatch(displayMessage(message));
