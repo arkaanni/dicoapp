@@ -4,6 +4,14 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from '../Header';
 
+/**
+ * test scenario
+ *
+ * - Header component
+ *  - should show header with login link when user is null
+ *  - should show header with logout button when user is not null
+ */
+
 describe('Header component test', () => {
   it('should show header with login link when user is null', () => {
     const { getByRole, queryByRole } = render(
