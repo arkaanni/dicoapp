@@ -17,4 +17,12 @@ describe('test dicodingforum api', () => {
     const resp = await userApi.register({ name: 'test', email: 'test@test.com', password: 'passwordtest'});
     expect(resp.success).toBeTruthy();
   });
+
+  it('get profile should rturn success', async () => {
+    fetch.mockImplementationOnce(() => Promise.resolve({
+      json: () => Promise.resolve({ status: 'fail' }),
+    }));
+    const resp = await userApi.profile();
+    expect(resp.success).toBeTruthy();
+  });
 });
