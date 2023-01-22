@@ -2,6 +2,16 @@
 
 import { baseUrl } from '../../src/api/dicodingforum';
 
+/**
+ * test scenario
+ *
+ * - Login spec
+ *  - should display login page correctly
+ *  - should display message if field is empty
+ *  - should display alert message when login is failed
+ *  - should go to home when login is success
+ */
+
 describe('login spec', () => {
   beforeEach(() => {
     cy.intercept(`${baseUrl}/users`, {
