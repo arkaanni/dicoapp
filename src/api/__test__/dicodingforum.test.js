@@ -12,7 +12,7 @@ describe('test dicodingforum api', () => {
 
   it('register should return success', async () => {
     fetch.mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve({ status: 'fail' }),
+      json: () => Promise.resolve({ status: 'success' }),
     }));
     const resp = await userApi.register({ name: 'test', email: 'test@test.com', password: 'passwordtest'});
     expect(resp.success).toBeTruthy();
@@ -20,7 +20,7 @@ describe('test dicodingforum api', () => {
 
   it('get profile should rturn success', async () => {
     fetch.mockImplementationOnce(() => Promise.resolve({
-      json: () => Promise.resolve({ status: 'fail' }),
+      json: () => Promise.resolve({ status: 'success' }),
     }));
     const resp = await userApi.profile();
     expect(resp.success).toBeTruthy();
