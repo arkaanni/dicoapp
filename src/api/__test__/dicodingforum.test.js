@@ -14,7 +14,7 @@ describe('test dicodingforum api', () => {
     fetch.mockImplementationOnce(() => Promise.resolve({
       json: () => Promise.resolve({ status: 'success' }),
     }));
-    const resp = await userApi.register({ name: 'test', email: 'test@test.com', password: 'passwordtest'});
+    const resp = await userApi.register({ name: 'test', email: 'test@test.com', password: 'passwordtest' });
     expect(resp.success).toBeTruthy();
   });
 

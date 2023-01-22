@@ -1,6 +1,15 @@
 import { Action } from '../action';
 import { userReducer } from '../reducer';
 
+/**
+ * test scenario
+ *
+ * - userReducer test
+ *  - should return initial state given invalid action
+ *  - should return null given UNSET_USER action
+ *  - should return user given SET_USER action
+ */
+
 describe('userReducer test', () => {
   it('should return initial state given invalid action', () => {
     const initialState = { name: 'test' };

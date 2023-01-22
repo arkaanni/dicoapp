@@ -1,6 +1,14 @@
 import { Action } from '../action';
 import { threadDetailReducer } from '../reducer';
 
+/**
+ * test scenario
+ *
+ * - threadDetailReducer test
+ *  - should return thread detail with new upvotes given ADD_UPVOTE action
+ *  - should return thread detail with new comment upvotes given ADD_COMMENT_UPVOTE action
+ */
+
 const initialState = {
   id: 'thread-1',
   title: 'Thread Pertama',
