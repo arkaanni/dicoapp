@@ -3,6 +3,14 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AddComment from '../AddComment';
 
+/**
+ * test scenario
+ * 
+ * - AddComment component
+ *  - should render component correctly
+ *  - should call onAddComment function when submit button clicked
+ */
+
 const mockThread = {
   id: 'thread-1',
   title: 'Thread Pertama',

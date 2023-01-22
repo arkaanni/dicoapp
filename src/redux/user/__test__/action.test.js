@@ -3,6 +3,13 @@ import { loginUser, setUser } from '../action';
 import { userApi } from '../../../api/dicodingforum';
 import { displayMessage, MessageType } from '../../message/action';
 
+/**
+ * test scenario
+ * - loginUser thunk test
+ *  - should dispatch displayMessage thunk when login failed
+ *  - should dispatch SET_USER action when login success
+ */
+
 jest.mock('../../../api/dicodingforum');
 jest.mock('../../message/action');
 
