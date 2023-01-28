@@ -11,14 +11,15 @@ function ThreadItem({
   return (
     <div className="card shadow rounded-none w-full bg-white">
       <div className="card-body flex-row p-1">
-        <div className="text-center p-4 w-2/12 border-r">
-          <div className="avatar w-16">
+        <div className="text-center lg:p-4 w-2/12">
+          <div className="avatar lg:w-16">
             <img className="avatar rounded-full" src={owner.avatar} alt="" />
           </div>
           <div>
             <p className="text-xs">{owner.name}</p>
           </div>
         </div>
+        <div className="border-r" />
         <div className="flex flex-col gap-4 p-4 w-10/12">
           {!isComment && (<p>{title}</p>)}
           <p className="text-xs">{body}</p>

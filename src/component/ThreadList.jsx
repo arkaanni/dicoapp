@@ -11,17 +11,17 @@ function ThreadList({ tagParam }) {
     : threadList.filter((it) => it.category === tagParam);
 
   return (
-    <div className="container mx-auto text-xs">
+    <div className="mx-auto text-xs">
       <table className="table table-fixed w-full rounded">
         <thead>
           <tr>
-            <th className="w-8/12 lowercase">thread</th>
-            <th className="w-1/12">
+            <th className="w-8/12 max-[640px]:w-7/12 lowercase">thread</th>
+            <th className="w-1/12 max-[640px]:hidden">
               <div className="flex justify-center">
                 <AiOutlineComment size={24} />
               </div>
             </th>
-            <th className="w-2/12">
+            <th className="w-2/12 max-[640px]:w-3/12">
               <div className="flex justify-center">
                 <AiOutlineClockCircle size={24} />
               </div>
@@ -47,7 +47,7 @@ function ThreadList({ tagParam }) {
                     </div>
                   </div>
                 </td>
-                <td className="text-center">
+                <td className="text-center max-[640px]:hidden">
                   <p>{it.totalComments}</p>
                 </td>
                 <td className="text-center">

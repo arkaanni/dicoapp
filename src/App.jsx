@@ -11,6 +11,7 @@ import Register from './page/Register';
 import ThreadDetail from './page/ThreadDetail';
 import { preloadState } from './redux/preload/action';
 import { logoutUser } from './redux/user/action';
+import AlertMessage from './component/AlertMessage';
 
 function App() {
   const dispatch = useDispatch();
@@ -38,9 +39,7 @@ function App() {
       </div>
       <div className="p-4">
         {message != null && (
-          <div className="alert bg-primary w-fit m-4 fixed z-50 bottom-0 right-0">
-            <p>{message.text}</p>
-          </div>
+          <AlertMessage type={message.type} text={message.text} />
         )}
         <Routes>
           <Route path="/" element={<Home />} />
