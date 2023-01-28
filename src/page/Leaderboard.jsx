@@ -8,7 +8,7 @@ function Leaderboard() {
 
   useEffect(() => {
     dispatch(fetchLeaderboard());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="container mx-auto flex flex-col gap-8">

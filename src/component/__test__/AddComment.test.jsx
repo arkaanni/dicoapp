@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AddComment from '../AddComment';
 
@@ -43,25 +43,21 @@ const mockThread = {
 describe('AddComment component test', () => {
   it('should render component correctly', async () => {
     const onAddComment = jest.fn();
-    const { getByPlaceholderText, getByRole } = render(
-      <AddComment onAddComment={onAddComment} threadId={mockThread.id} />,
-    );
-    const addCommentInput = getByPlaceholderText('tambah komentar');
+    render(<AddComment onAddComment={onAddComment} threadId={mockThread.id} />);
+    const addCommentInput = screen.getByPlaceholderText('tambah komentar');
     expect(addCommentInput).toBeInTheDocument();
     await userEvent.type(addCommentInput, 'test komentar');
     expect(addCommentInput).toHaveValue('test komentar');
-    expect(getByRole('button', { name: 'submit' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'submit' })).toBeInTheDocument();
   });
 
   it('should call onAddComment function when submit button clicked', async () => {
     const onAddComment = jest.fn();
-    const { getByPlaceholderText, getByRole } = render(
-      <AddComment onAddComment={onAddComment} threadId={mockThread.id} />,
-    );
-    const addCommentInput = getByPlaceholderText('tambah komentar');
+    render(<AddComment onAddComment={onAddComment} threadId={mockThread.id} />);
+    const addCommentInput = screen.getByPlaceholderText('tambah komentar');
     await userEvent.type(addCommentInput, 'test komentar');
     expect(addCommentInput).toHaveValue('test komentar');
-    const submitBtn = getByRole('button', { name: 'submit' });
+    const submitBtn = screen.getByRole('button', { name: 'submit' });
     await userEvent.click(submitBtn);
     expect(onAddComment).toHaveBeenCalledWith({
       threadId: mockThread.id,

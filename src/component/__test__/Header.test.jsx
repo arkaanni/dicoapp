@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Header from '../Header';
 
@@ -14,14 +14,14 @@ import Header from '../Header';
 
 describe('Header component test', () => {
   it('should show header with login link when user is null', () => {
-    const { getByRole, queryByRole } = render(
+    render(
       <BrowserRouter>
         <Header handleLogout={null} />
       </BrowserRouter>,
     );
-    const loginLink = getByRole('link', { name: 'login' });
+    const loginLink = screen.getByRole('link', { name: 'login' });
     expect(loginLink).toBeInTheDocument();
-    expect(queryByRole('link', { name: 'logout' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'logout' })).not.toBeInTheDocument();
   });
 
   it('should show header with logout button when user is not null', async () => {
@@ -31,13 +31,13 @@ describe('Header component test', () => {
       name: 'user 1',
       email: 'test@test.com',
     };
-    const { getByRole, queryByRole } = render(
+    render(
       <BrowserRouter>
         <Header user={mockUser} onLogout={onLogout} />
       </BrowserRouter>,
     );
-    expect(queryByRole('link', { name: 'login' })).not.toBeInTheDocument();
-    const logoutBtn = getByRole('button', { name: 'logout' });
+    expect(screen.queryByRole('link', { name: 'login' })).not.toBeInTheDocument();
+    const logoutBtn = screen.getByRole('button', { name: 'logout' });
     expect(logoutBtn).toBeEnabled();
     await userEvent.click(logoutBtn);
     expect(onLogout).toHaveBeenCalledTimes(1);
