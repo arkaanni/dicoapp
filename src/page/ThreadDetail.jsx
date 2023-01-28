@@ -42,7 +42,7 @@ function ThreadDetail() {
   }
 
   return (
-    <div className="container mx-auto w-7/12 flex flex-col gap-4">
+    <div className="container mx-auto lg:w-7/12 flex flex-col gap-4">
       <div className="flex flex-col gap-4">
         <ThreadItem
           title={threadDetail.title}
@@ -54,6 +54,7 @@ function ThreadDetail() {
         />
         <p>
           kategori:
+          &nbsp;
           <span className="badge badge-secondary">{threadDetail.category}</span>
         </p>
         {user != null ? (

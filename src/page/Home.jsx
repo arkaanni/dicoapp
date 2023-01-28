@@ -12,11 +12,11 @@ function Home() {
   };
 
   return (
-    <div className="flex gap-6 w-full mx-auto">
-      <div className="w-9/12 rounded-lg shadow">
+    <div className="flex flex-col gap-6 w-full mx-auto lg:flex-row">
+      <div className="md:w-full lg:w-9/12 rounded-lg shadow">
         <ThreadList tagParam={searchParam.get('tag')} />
       </div>
-      <div className="w-3/12 flex flex-col gap-4">
+      <div className="md:w-full lg:w-3/12 flex flex-col gap-4">
         {user != null && (<Link to="/thread/new" className="btn btn-primary lowercase">buat thread</Link>)}
         <div className="card shadow rounded">
           <div className="card-body p-4">

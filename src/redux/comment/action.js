@@ -19,14 +19,14 @@ const upvoteComment = ({
   if (userId === null) {
     dispatch(displayMessage({
       type: MessageType.ERROR,
-      text: 'login untuk memberikan vote',
+      text: 'login untuk memberikan upvote',
     }));
     return;
   }
   let voteFunc = threadApi.comments.votes.upVote;
   const message = {
     type: MessageType.INFO,
-    text: 'berhasil memberikan vote',
+    text: 'berhasil memberikan upvote',
   };
   if (unUpvote) {
     voteFunc = threadApi.comments.votes.neutralize;
