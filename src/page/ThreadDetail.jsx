@@ -14,7 +14,7 @@ function ThreadDetail() {
 
   useEffect(() => {
     dispatch(fetchThreadDetail({ threadId: id }));
-  }, []);
+  }, [dispatch, id]);
 
   const onUpvote = () => {
     const isUpvoted = threadDetail.upVotesBy.find((it) => it === user?.id);
